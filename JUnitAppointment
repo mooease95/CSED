@@ -1,0 +1,46 @@
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class JUnitAppointment {
+
+	@Test
+	public void testAddAppointment() {
+		AppointmentOrganiser testAppOrganiser = new AppointmentOrganiser();
+		testAppOrganiser.addAppointment("Lunch", "04/12/2016", "12:00", "McDonalds", "With Maddy");
+		Appointment testApp = new Appointment("Lunch", "04/12/2016", "12:00", "McDonalds", "With Maddy");
+		Appointment addedApp = testAppOrganiser.getAppointment("Lunch");
+		assertEquals(testApp.getTitle(), addedApp.getTitle());
+		assertEquals(testApp.getDate(), addedApp.getDate());
+		assertEquals(testApp.getLocation(), addedApp.getLocation());
+		assertEquals(testApp.getDate(), addedApp.getDate());
+		assertEquals(testApp.getTime(), addedApp.getTime());
+	}
+	
+	@Test
+	public void testChangeAppointment() throws Exception {
+		AppointmentOrganiser testAppOrganiser = new AppointmentOrganiser();
+		testAppOrganiser.addAppointment("Lunch", "04/12/2016", "12:00", "McDonalds", "With Maddy");
+		Appointment testApp = new Appointment("Lunch", "04/12/2016", "14:00", "McDonalds", "With Maddy");
+		String[] whatToChange = {"time"};
+		String[] whatToChangeTo = {"14:00"};
+		testAppOrganiser.changeAppointment("Lunch", whatToChange, whatToChangeTo);
+		Appointment addedApp = testAppOrganiser.getAppointment("Lunch");
+		assertEquals(testApp.getTime(), addedApp.getTime());
+	}
+	
+	@Test
+	public void testPrintAllAppointment() {
+		AppointmentOrganiser testAppOrganiser = new AppointmentOrganiser();
+		testAppOrganiser.addAppointment("Lunch", "04/12/2016", "12:00", "McDonalds", "With Maddy");
+		assertEquals(testAppOrganiser.printAllAppointments(), "Lunch, 04/12/2016, 12:00, McDonalds, With Maddy");
+	}
+	
+	@Test
+	public void testRemoveAppointment() throws Exception {
+		AppointmentOrganiser testAppOrganiser = new AppointmentOrganiser();
+		testAppOrganiser.addAppointment("Lunch", "04/12/2016", "12:00", "McDonalds", "With Maddy");
+		testAppOrganiser.removeAppointment("Lunch");
+		assertEquals(testAppOrganiser.printAllAppointments(), "");
+	}
+
+}
